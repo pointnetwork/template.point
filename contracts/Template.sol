@@ -3,9 +3,12 @@ pragma solidity >=0.8.0;
 pragma experimental ABIEncoderV2;
 
 import "@openzeppelin/contracts/utils/Counters.sol";
+import "@openzeppelin/contracts-upgradeable/proxy/utils/Initializable.sol";
+import "@openzeppelin/contracts-upgradeable/proxy/utils/UUPSUpgradeable.sol";
+import "@openzeppelin/contracts-upgradeable/access/OwnableUpgradeable.sol";
 
 // This is an example contract. Please remove and create your own!
-contract Template  {
+contract Template is Initializable, UUPSUpgradeable, OwnableUpgradeable{
     using Counters for Counters.Counter;
     Counters.Counter internal _exampleIds;
 
@@ -27,6 +30,13 @@ contract Template  {
     Example[] public examples;
     mapping(address => Example[]) public examplesByOwner;
     mapping(uint => Example) public exampleById;
+
+    function initialize() public initializer onlyProxy {
+        __Ownable_init();
+        __UUPSUpgradeable_init();
+    }
+
+    function _authorizeUpgrade(address) internal override onlyOwner {}
 
     // Post data functions
     // example bytes32: "0x0000000000000000000000000000000000000000000068692066726f6d20706e"

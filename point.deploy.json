@@ -26,5 +26,6 @@
     },
     "contracts": [
       "Template"
-    ]
+    ],
+    "upgradable": true
   }
