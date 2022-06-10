@@ -27,5 +27,7 @@
     "contracts": [
       "Template"
     ],
-    "upgradable": true
+    "upgradable": true,
+    "pointSDKVersion": "0.0.10" ,
+    "pointNodeVersion": "0.1.78"
   }
