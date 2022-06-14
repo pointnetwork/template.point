@@ -12,19 +12,36 @@ This template Zapp uses:
 * [React Bootstrap](https://react-bootstrap.github.io/) **v 2.x**
 * [Bootstrap](https://getbootstrap.com/) **v 5.x**
 
-## Prepare for deployment
+## Deploy the site to YNet using Point Node
+
+### Build the Zapp 
 
 Since this a React JS site it rquires to be built before it can be deployed as follows:
 
-1. Run `npm i`
-2. Run `npm run build`
+```
+npm i
+npm run build
+```
 
-Now a `public` folder will be created containing the deployable built site. You can now deploy the site to the network using the `point-deploy` executable. For details on deploying to the network see this [README](../../deployspace/README.md)
+Now a `public` folder will be created containing the deployable built site. 
 
-## Prepare for development
+### Clone the Point Network repo, install dependencies and start the node (connecting to Ynet)
 
-1. CD into the [./example/template.point](./example/template.point) directory.
-1. Run `npm i` to install the sites dependencies
-1. Run `npm run watch` (or `npm run watch:docker` if you are running the Node using Docker) to have *parcel* watch the site and build it on any detected changes
-1. Run `./scripts/deploy-sites.sh template --contracts` (from the node root folder) to deploy the sites `views` directory that was built using parcel.
-1. From the [Point SDK repo README](https://github.com/pointnetwork/pointsdk#using-web-ext), follow the instructions to start an instance of Firefox with the Point SDK extention already installed using `web-ext` command.
+Note that when you start the node it will use your key file found in your local point directory: `~/.point/keystore/key.json`. If you do not have this file then the node will not start. To create this file simply install [Point Network Alpha](https://pointnetwork.io/alpha). 
+
+```
+git clone git@github.com:pointnetwork/pointnetwork.git
+cd pointnetwork
+nvm use
+npm i
+npm run start
+```
+
+### Run the Point Deployer CLI
+
+Note this command is run from the `pointnetwork` cloned repo (see above and assumes the Zapp is one level below the directoy where the command is run.
+
+```
+cd pointnetwork
+./point deploy ../template.point --contracts
+``
