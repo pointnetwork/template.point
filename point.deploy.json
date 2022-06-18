@@ -1,6 +1,6 @@
 {
     "version": 0.1,
-    "target": "ynet_template.point",
+    "target": "template.point",
     "keyvalue": {
       "example0": {
         "contract_send": "Template.addExample(contents)",
